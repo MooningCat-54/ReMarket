@@ -1,11 +1,11 @@
 .auth-wrapper {
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  background-color: var(--color-bg); /* Derin siyah/lacivert arka plan */
+  background-color: var(--color-bg);
 }
 
 .auth-header {
@@ -16,8 +16,8 @@
 .auth-header__logo {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--color-primary); /* Mavi ReMarket rengi */
-  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;  
   letter-spacing: -1px;
 }
 

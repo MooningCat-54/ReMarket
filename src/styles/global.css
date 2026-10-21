@@ -1,19 +1,17 @@
 :root {
-  /* Renk Paleti - Senin Mevcut Koyu Teman */
-  --color-bg: #0d1117;           /* Sayfa arka planı */
-  --color-surface: #010409;      /* Kartlar, Widgetlar, Modal */
-  --color-surface-hover: #161b22;/* Hover durumları ve Sidebar */
-  --color-border: #30363d;       /* Tüm çizgiler */
+  --color-bg: #0d1117;           
+  --color-surface: #010409;      
+  --color-surface-hover: #161b22;
+  --color-border: #30363d;      
   
-  --color-primary: #58a6ff;      /* Mavi linkler ve aktif sekmeler */
-  --color-text: #c9d1d9;         /* Ana beyaz/gri metin */
-  --color-text-muted: #8b949e;   /* Soluk gri metinler */
+  --color-primary: #58a6ff;      
+  --color-text: #c9d1d9;         
+  --color-text-muted: #8b949e;   
   
-  --color-success: #3fb950;      /* Başarı/Bütçe yeşili (Yazılar için) */
-  --color-success-bg: #238636;   /* Yeşil buton arka planı */
-  --color-success-hover: #2ea043;/* Yeşil buton hover */
+  --color-success: #3fb950;      
+  --color-success-bg: #238636;   
+  --color-success-hover: #2ea043;
 
-  /* Boşluklar ve Yuvarlamalar */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;

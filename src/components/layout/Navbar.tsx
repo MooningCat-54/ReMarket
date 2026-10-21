@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
           <button className="navbar__link" onClick={() => navigate('/profile/bireysel')}>Profilim</button>
           
           {/* Piyasayı yeni canlı mezat ekranına bağlayalım */}
-          <button className="navbar__link" onClick={() => navigate('/auction')}>Piyasa</button>
+          <button className="navbar__link" onClick={() => navigate('/marketplace')}>Piyasa</button>
           
           {/* Yeni form sayfamıza yönlendiriyor */}
           <button className="btn-glow-success" onClick={() => navigate('/create')}>Talep / İlan Oluştur</button>
