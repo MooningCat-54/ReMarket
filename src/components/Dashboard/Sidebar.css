@@ -1,0 +1,117 @@
+.dash-sidebar {
+  flex: 0 0 390px; 
+  background-color: var(--color-surface-hover); 
+  border-right: 1px solid var(--color-border);
+  padding: 2rem 1.5rem;
+  height: calc(100vh - 70px);
+  position: sticky; 
+  top: 70px; 
+  overflow-y: auto;
+}
+
+.dash-sidebar__profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dash-sidebar__avatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #58a6ff, #1f6feb);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.dash-sidebar__name {
+  color: #ffffff;
+  margin: 0 0 0.2rem 0;
+  font-size: 1.1rem;
+}
+
+.dash-sidebar__type {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  background: rgba(139, 148, 158, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+.dash-sidebar__nav-heading {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.dash-sidebar__nav-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dash-sidebar__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s;
+  color: var(--color-text-muted);
+}
+
+.dash-sidebar__nav-item:hover {
+  background: rgba(177, 186, 196, 0.12);
+  color: var(--color-text);
+}
+
+.dash-sidebar__nav-item--active {
+  background: rgba(88, 166, 255, 0.1);
+  color: #ffffff;
+  font-weight: 500;
+  border-left: 3px solid var(--color-primary);
+}
+
+.dash-sidebar__item-text {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-sidebar__item-count {
+  background: rgba(139, 148, 158, 0.2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+}
+
+.dash-sidebar__nav-simple {
+  list-style: none;
+  padding: 0;
+}
+
+.dash-sidebar__nav-simple li { margin-bottom: 0.5rem; }
+
+.dash-sidebar__nav-simple a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.dash-sidebar__nav-simple a:hover { 
+  text-decoration: underline; 
+}
+

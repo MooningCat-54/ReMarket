@@ -1,0 +1,136 @@
+:root {
+  /* Renk Paleti - Senin Mevcut Koyu Teman */
+  --color-bg: #0d1117;           /* Sayfa arka planı */
+  --color-surface: #010409;      /* Kartlar, Widgetlar, Modal */
+  --color-surface-hover: #161b22;/* Hover durumları ve Sidebar */
+  --color-border: #30363d;       /* Tüm çizgiler */
+  
+  --color-primary: #58a6ff;      /* Mavi linkler ve aktif sekmeler */
+  --color-text: #c9d1d9;         /* Ana beyaz/gri metin */
+  --color-text-muted: #8b949e;   /* Soluk gri metinler */
+  
+  --color-success: #3fb950;      /* Başarı/Bütçe yeşili (Yazılar için) */
+  --color-success-bg: #238636;   /* Yeşil buton arka planı */
+  --color-success-hover: #2ea043;/* Yeşil buton hover */
+
+  /* Boşluklar ve Yuvarlamalar */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.w-full { width: 100%; }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-6 { margin-top: var(--spacing-lg); }
+.text-muted { color: var(--color-text-muted); }
+.text-success { color: var(--color-success); }
+.text-sm { font-size: 0.85rem; }
+
+.box-surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+}
+
+.tag {
+  background: rgba(88, 166, 255, 0.1); 
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badge {
+  background: var(--color-success-bg);
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 100px;
+}
+
+.btn-sm { 
+  padding: var(--spacing-sm) var(--spacing-md); 
+  font-size: 0.85rem; 
+  border-radius: var(--radius-md); 
+  cursor: pointer; 
+  font-weight: 600; 
+}
+
+.btn-xs { 
+  padding: 0.2rem 0.6rem; 
+  font-size: 0.8rem; 
+  border-radius: var(--radius-sm); 
+  cursor: pointer; 
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--color-border); color: #ffffff; }
+
+.btn-text, .btn-text-link {
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-text-link:hover { text-decoration: underline; }
+
+.btn-glow-success {
+  background-color: var(--color-success-bg);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-glow-success:hover { 
+  background-color: var(--color-success-hover); 
+  box-shadow: 0 0 15px rgba(46, 160, 67, 0.4); 
+}
+
+.input-base {
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.input-base:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+}

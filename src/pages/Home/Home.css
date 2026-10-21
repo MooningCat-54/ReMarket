@@ -1,0 +1,24 @@
+/* Ana kapsayıcı sınırları kaldırdık, tam ekran yayılıyor */
+.home-page-fluid {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #0d1117; /* GitHub tarzı derin koyu renk */
+  color: #c9d1d9;
+}
+
+.btn-text-link {
+  background: none;
+  border: none;
+  color: #58a6ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-text-link:hover {
+  text-decoration: underline;
+}
+

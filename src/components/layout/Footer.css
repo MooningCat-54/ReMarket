@@ -1,0 +1,7 @@
+.footer {
+  width: 100%;
+  padding: 8rem 2rem;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface-hover) 100%);
+  color: var(--color-text-muted);
+  text-align: center;
+}

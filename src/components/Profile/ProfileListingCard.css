@@ -1,0 +1,49 @@
+.profile-listing-card {
+  background-color: #010409;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-listing-card:hover {
+  border-color: #8b949e;
+}
+
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.time-posted {
+  font-size: 0.8rem;
+  color: #8b949e;
+}
+
+.profile-listing-card h4 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.listing-desc {
+  font-size: 0.9rem;
+  color: #8b949e;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.listing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #3fb950;
+}

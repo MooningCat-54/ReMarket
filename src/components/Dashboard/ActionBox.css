@@ -1,0 +1,19 @@
+.action-box {
+  margin-bottom: 2.5rem;
+}
+
+.action-box__input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.action-box__actions {
+  display: flex;
+  gap: 0.8rem;
+}
+

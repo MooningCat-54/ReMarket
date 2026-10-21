@@ -1,0 +1,62 @@
+.marketplace-fluid {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-bg); 
+  position: relative;
+  overflow: hidden;
+  color: var(--color-text);
+}
+
+.bg-glow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-glow-top-left {
+  top: -200px;
+  left: -200px;
+}
+
+.marketplace-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: grid;
+  grid-template-columns: 280px 1fr; 
+  gap: 2.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.feed-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.feed-header__title {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.feed-header__title span {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin-left: 0.5rem;
+}
+
+.demand-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
