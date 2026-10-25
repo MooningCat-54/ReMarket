@@ -63,7 +63,7 @@ export const CreatePost: React.FC = () => {
 
           {category && (
             <div className="specs-box">
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>Teknik Detaylar</h3>
+              <h3 className="spec-box__header">Teknik Detaylar</h3>
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-group__label">{category === 'cpu' ? 'Soket Tipi' : 'Minimum Gereksinim'}</label>

@@ -11,7 +11,7 @@ interface BidProps {
   offerPrice: number;
   message: string;
   timeAgo: string;
-  isHighest?: boolean; // En yüksek teklif mi?
+  isHighest?: boolean;
 }
 
 export const BidCard: React.FC<BidProps> = ({ bidderName, reputationScore, offerPrice, message, timeAgo, isHighest }) => {
@@ -19,12 +19,10 @@ export const BidCard: React.FC<BidProps> = ({ bidderName, reputationScore, offer
     <article className="bid-card">
       <header className="bid-card__header">
         <div className="bid-card__user-info">
-          {/* Kendi Avatar legomuzu kullanıyoruz */}
           <Avatar size="md" fallback={bidderName.substring(0, 2)} status="online" />
           <div>
             <h3 className="bid-card__name">
               {bidderName}
-              {/* Kendi Badge legomuzu kullanıyoruz */}
               <Badge variant={reputationScore >= 9 ? 'success' : 'warning'}>
                 ★ {reputationScore}
               </Badge>
@@ -42,7 +40,7 @@ export const BidCard: React.FC<BidProps> = ({ bidderName, reputationScore, offer
 
       <footer className="bid-card__footer">
         <time className="bid-card__time">{timeAgo}</time>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div className="bid-card__button-wrapper">
           <Button variant="outline" size="sm">Profili Gör</Button>
           {isHighest && <Button variant="primary" size="sm">Kabul Et</Button>}
         </div>

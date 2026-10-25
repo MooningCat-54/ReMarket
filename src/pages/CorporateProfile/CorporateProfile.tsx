@@ -22,7 +22,6 @@ export const CorporateProfile: React.FC = () => {
       
       <div 
         className="corp-profile__banner" 
-        /* Veritabanından gelen fotoğraf buraya style ile verilir (Sadece background image dinamik olduğu için bu bir BEM ihlali sayılmaz) */
         style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80)' }}
       ></div>
 

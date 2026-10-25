@@ -52,6 +52,11 @@
   margin-bottom: 1.5rem;
 }
 
+.auction-showcase__text-area {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
 .auction-timer__label {
   color: #ff7b72;
   font-weight: 600;
@@ -83,20 +88,16 @@
   align-items: center;
 }
 
+.auctob-stream__header-text {
+  font-size: 1.2rem;
+}
+
 .auction-stream__list {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.5rem;
   display: flex;
   flex-direction: column;
-}
-
-.auction-stream__form {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 1.2rem;
-  margin-top: 1rem;
 }
 
 @media (max-width: 900px) {

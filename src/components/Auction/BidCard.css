@@ -71,3 +71,8 @@
   font-size: 0.8rem;
   color: var(--color-text-muted);
 }
+
+.bid-card__button-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}

@@ -9,7 +9,6 @@ interface AvatarProps {
 }
 
 export const Avatar: React.FC<AvatarProps> = ({ src, alt, fallback, size = 'md', status }) => {
-  // Boyutları dinamik olarak veriyoruz
   const sizeMap = { sm: '24px', md: '48px', lg: '64px' };
   const currentSize = sizeMap[size];
 
