@@ -1,38 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // URL'deki parametreyi okumak için
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { AuctionForm } from '../../components/Auction/AuctionForm';
 import { BidCard } from '../../components/Auction/BidCard';
 import { Badge } from '../../components/ui/Badge';
-import { getProducts, type Product } from '../../services/api';
+import { getBids, getProducts, type Bid, type Product } from '../../services/api';
 import './LiveAuction.css';
 
 export const LiveAuction: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>(); // URL'den gelen id (örn: /auction/3 ise productId = "3")
+  const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  const [bids, setBids] = useState<Bid[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [bids] = useState([
-    { id: 1, bidder: "TechMaster99", score: 9.2, price: 4100, message: "Hemen elden alabilirim.", time: "1 dk önce" },
-    { id: 2, bidder: "HardwareGuru", score: 8.5, price: 3800, message: "Kargo ile gönderirseniz alırım.", time: "5 dk önce" }
-  ]);
+  const numericProductId = Number(productId);
+
+  const fetchAuctionData = useCallback(async () => {
+    if (!numericProductId) return;
+    try {
+      const [productsData, bidsData] = await Promise.all([
+        getProducts(),
+        getBids(numericProductId)
+      ]);
+
+      const foundProduct = productsData.find((p) => p.id === numericProductId);
+      if (foundProduct) {
+        setProduct(foundProduct);
+      }
+      setBids(bidsData);
+    } catch (err) {
+      console.error("Mezat verileri yüklenemedi:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [numericProductId]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const products = await getProducts();
-        const found = products.find((p) => p.id === Number(productId));
-        if (found) {
-          setProduct(found);
-        }
-      } catch (err) {
-        console.error("Ürün yüklenemedi:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [productId]);
+    fetchAuctionData();
+  }, [fetchAuctionData]);
 
   if (loading) return <div style={{ color: 'white', padding: '20px' }}>Yükleniyor...</div>;
   if (!product) return <div style={{ color: 'white', padding: '20px' }}>Ürün bulunamadı.</div>;
@@ -50,7 +54,6 @@ export const LiveAuction: React.FC = () => {
         </div>
 
         <div className="box-surface auction-showcase__info">
-          {/* Dinamik Ürün Başlığı */}
           <h1 className="auction-title">{product.title}</h1>
           
           <div className="auction-timer">
@@ -58,7 +61,6 @@ export const LiveAuction: React.FC = () => {
             <span className="auction-timer__value">00:14:59</span>
           </div>
 
-          {/* Dinamik Ürün Açıklaması */}
           <p className="auction-showcase__text-area">
             {product.content}
           </p>
@@ -72,20 +74,24 @@ export const LiveAuction: React.FC = () => {
         </header>
 
         <div className="auction-stream__list">
-          {bids.map((bid, index) => (
-            <BidCard 
-              key={bid.id}
-              bidderName={bid.bidder}
-              reputationScore={bid.score}
-              offerPrice={bid.price}
-              message={bid.message}
-              timeAgo={bid.time}
-              isHighest={index === 0}
-            />
-          ))}
+          {bids.length === 0 ? (
+            <p style={{ color: '#888', textAlign: 'center', padding: '20px' }}>Henüz teklif verilmemiş. İlk teklifi sen ver!</p>
+          ) : (
+            bids.map((bid, index) => (
+              <BidCard 
+                key={bid.id}
+                bidderName={`Kullanıcı #${bid.user_id}`} // İleride kullanıcı adı join ile eklenebilir
+                reputationScore={9.0} // Şimdilik standart puan
+                offerPrice={bid.amount}
+                message={bid.message || ""}
+                timeAgo={new Date(bid.created_at).toLocaleTimeString()}
+                isHighest={index === 0}
+              />
+            ))
+          )}
         </div>
 
-        <AuctionForm />
+        <AuctionForm productId={numericProductId} onBidCreated={fetchAuctionData} />
       </aside>
     </main>
   );

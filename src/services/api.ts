@@ -54,6 +54,22 @@ export interface UserProfile {
   created_at: string;
 }
 
+export interface Bid {
+  id: number;
+  product_id: number;
+  user_id: number;
+  amount: number;
+  message?: string | null;
+  created_at: string;
+}
+
+export interface BidCreateData {
+  product_id: number;
+  user_id: number;
+  amount: number;
+  message?: string;
+}
+
 export async function loginUser(credentials: LoginCredentials): Promise<AuthResponse> {
   const response = await fetch(`${API_URL}/api/login`, {
     method: "POST",
@@ -114,7 +130,7 @@ export async function createProduct(productData: ProductCreateData) {
 }
 
 export async function getUserProfile(userId: number): Promise<UserProfile> {
-  const response = await fetch(`${API_URL}/api/profiles/${userId}`);
+  const response = await fetch(`${API_URL}/profiles/${userId}`);
 
   if (!response.ok) {
     if (response.status === 404) {
@@ -124,4 +140,29 @@ export async function getUserProfile(userId: number): Promise<UserProfile> {
   }
 
   return response.json();
+}
+
+export async function getBids(productId: number): Promise<Bid[]> {
+  const response = await fetch(`${API_URL}/api/bids/${productId}`);
+  if (!response.ok) {
+    throw new Error("Teklifler yüklenirken bir hata oluştu.");
+  }
+  return await response.json();
+}
+
+export async function createBid(bidData: BidCreateData) {
+  const response = await fetch(`${API_URL}/api/bids`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bidData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || "Teklif verilemedi!");
+  }
+
+  return await response.json();
 }
