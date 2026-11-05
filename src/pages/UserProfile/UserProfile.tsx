@@ -1,4 +1,3 @@
-// UserProfile.tsx
 import React, { useEffect, useState } from 'react';
 import { ProfileListingCard } from '../../components/Profile/ProfileListingCard';
 import { ProfileStatBox } from '../../components/Profile/ProfileStatBox';
@@ -6,35 +5,41 @@ import { ProfileTabs } from '../../components/Profile/ProfileTabs';
 import { Avatar } from '../../components/ui/Avatar';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
+import { getProducts, getUserProfile, type Product, type UserProfile as UserProfileType } from '../../services/api';
 import './UserProfile.css';
 
 export const UserProfile: React.FC = () => {
   const [activeTab, setActiveTab] = useState('active');
-  const [profile, setProfile] = useState<any>(null);
-  const [listings, setListings] = useState<any[]>([]);
+  const [profile, setProfile] = useState<UserProfileType | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    Promise.all([
-      fetch('http://127.0.0.1:8000/api/profiles').then(res => res.json()),
-      fetch('http://127.0.0.1:8000/api/listings').then(res => res.json())
-    ])
-      .then(([profilesData, listingsData]) => {
-        if (profilesData && profilesData.length > 0) {
-          const currentProfile = profilesData[1];
-          setProfile(currentProfile);
+    const fetchUserData = async () => {
+      try {
+        const storedUserId = parseInt(localStorage.getItem('user_id') || "");
 
-          const userListings = listingsData.filter(
-            (item: any) => item.user_id === currentProfile.id
-          );
-          setListings(userListings);
-        }
+        const [profileData, productsData] = await Promise.all([
+          getUserProfile(storedUserId),
+          getProducts()
+        ]);
+
+        setProfile(profileData);
+
+        const userProducts = productsData.filter(
+          (item) => item.user_id === profileData.id
+        );
+        setProducts(userProducts);
+      } catch (err: any) {
+        console.error("Profil verileri çekilirken hata oluştu:", err);
+        setError(err.message || 'Profil yüklenirken bir hata oluştu.');
+      } finally {
         setLoading(false);
-      })
-      .catch(err => {
-        console.error("Veri çekme hatası:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const tabs = [
@@ -43,7 +48,7 @@ export const UserProfile: React.FC = () => {
   ];
 
   if (loading) return <div className="user-profile__loading">Profil yükleniyor...</div>;
-  if (!profile) return <div className="user-profile__error">Kullanıcı bulunamadı.</div>;
+  if (error || !profile) return <div className="user-profile__error">{error || 'Kullanıcı bulunamadı.'}</div>;
 
   return (
     <main className="user-profile">
@@ -52,7 +57,7 @@ export const UserProfile: React.FC = () => {
         <div className="user-profile__avatar-wrapper">
           <Avatar 
             size="lg" 
-            fallback={profile.full_name ? profile.full_name.slice(0, 2).toUpperCase() : 'UNKOWN'} 
+            fallback={profile.full_name ? profile.full_name.slice(0, 2).toUpperCase() : 'UNKNOWN'} 
             status="online" 
           />
         </div>
@@ -83,19 +88,19 @@ export const UserProfile: React.FC = () => {
       <section className="user-profile__stats">
         <ProfileStatBox label="Satıcı Skoru" value="9.8" highlight />
         <ProfileStatBox label="Başarılı İşlem" value="12" />
-        <ProfileStatBox label="Aktif İlan" value={listings.length.toString()} />
+        <ProfileStatBox label="Aktif İlan" value={products.length.toString()} />
         <ProfileStatBox label="Mesaj Yanıtlama" value="%100" />
       </section>
 
       <section className="user-profile__content">
         <ProfileTabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
         
-        <div className="user-profile__user-profile__tab-body">
+        <div className="user-profile__tab-body">
           {activeTab === 'active' && (
             <div className="user-profile__grid">
-              {listings.length > 0 ? (
-                listings.map((listing) => (
-                  <ProfileListingCard key={listing.id} listing={listing} />
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <ProfileListingCard key={product.id} listing={product} />
                 ))
               ) : (
                 <p className="user-profile__empty">Bu kullanıcıya ait aktif ilan bulunmuyor.</p>

@@ -2,12 +2,21 @@ import React from "react";
 import "./Sidebar.css";
 
 export const Sidebar: React.FC = () => {
+    const userName = localStorage.getItem('user_name') || 'Unknown';
+    
+    const initials = userName
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+
     return(
         <aside className="dash-sidebar">
         <div className="dash-sidebar__profile">
-          <div className="dash-sidebar__avatar">BE</div>
+          <div className="dash-sidebar__avatar">{initials}</div>
           <div>
-            <h4 className="dash-sidebar__name">Berat Ese</h4>
+            <h4 className="dash-sidebar__name">{userName}</h4>
             <span className="dash-sidebar__type">Bireysel Hesap</span>
           </div>
         </div>

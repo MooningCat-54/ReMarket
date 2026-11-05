@@ -1,18 +1,32 @@
+// DashWidgets.tsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import type { Product } from "../../services/api";
 import "./DashWidgets.css";
 
-export const DashWidgets: React.FC = () => {
-    return(
+interface DashWidgetsProps {
+  products?: Product[];
+}
+
+export const DashWidgets: React.FC<DashWidgetsProps> = ({ products = [] }) => {
+    const navigate = useNavigate();
+
+    return (
         <aside className="dash-widgets">
             <div className="box-surface dash-widgets__box--highlight">
                 <h3 className="dash-widgets__title">Eski donanımın mı var?</h3>
                 <p className="dash-widgets__desc">Hemen sisteme yükle, arayan alıcılarla anında eşleş.</p>
-                <button className="btn-glow-success w-full">Yeni Ürün Satışı Aç</button>
+                <button 
+                  className="btn-glow-success w-full"
+                  onClick={() => navigate('/create-post')}
+                >
+                  Yeni Ürün Satışı Aç
+                </button>
             </div>
 
             <div className="box-surface">
                 <div className="dash-widgets__header">
-                    <h3 className="dash-widgets__title" style={{marginBottom: 0}}>Gelen Teklifler</h3>
+                    <h3 className="dash-widgets__title" style={{ marginBottom: 0 }}>Gelen Teklifler</h3>
                     <span className="badge">1 Yeni</span>
                 </div>
               
@@ -28,8 +42,11 @@ export const DashWidgets: React.FC = () => {
             </div>
 
             <div className="box-surface">
-                <h3 className="dash-widgets__title">Trend Kategoriler</h3>
-                <ul className="dash-widgets__trend-list">
+                <div className="dash-widgets__header">
+                    <h3 className="dash-widgets__title" style={{ marginBottom: 0 }}>Piyasadaki İlanlar</h3>
+                    <span className="badge">{products.length} İlan</span>
+                </div>
+                <ul className="dash-widgets__trend-list" style={{ marginTop: '1rem' }}>
                     <li className="dash-widgets__trend-item">
                       <span className="dash-widgets__trend-rank">1</span> AMD İşlemciler <span className="dash-widgets__trend-up">↑</span>
                     </li>

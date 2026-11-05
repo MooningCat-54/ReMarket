@@ -25,7 +25,6 @@ export const Select: React.FC<SelectProps> = ({ options, placeholder, icon, clas
           <option key={opt.value} value={opt.value}>{opt.label}</option>
         ))}
       </select>
-      <span className="absolute right-3 text-[var(--color-text-muted)] pointer-events-none">▼</span>
     </div>
   );
 };

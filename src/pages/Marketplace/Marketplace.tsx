@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DemandCard } from '../../components/Marketplace/DemandCard';
 import { Filterbar } from '../../components/Marketplace/Filterbar';
 import { Select } from '../../components/ui/Select';
 import { FilterModal } from './FilterModal';
 import './Marketplace.css';
 
-export const Marketplace: React.FC = () => {
+import { getProducts, type Product } from '../../services/api';
+
+
+export const Marketplace: React.FC= () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const fetchMarketData = async () => {
+        try {
+          const data = await getProducts();
+          setProducts(data);
+        } catch (error) {
+          console.error('Market verileri çekilirken hata oluştu:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchMarketData();
+    }, []);
 
   const sortOptions = [
     { value: 'newest', label: 'En Yeniler' },
@@ -28,7 +49,9 @@ export const Marketplace: React.FC = () => {
 
         <main className="feed-area">
           <div className="feed-header">
-            <h2 className="feed-header__title">Aktif Talepler <span>(14 Sonuç)</span></h2>
+            <h2 className="feed-header__title">
+              Aktif Talepler <span>({products.length} Sonuç)</span>
+            </h2>
             
             <Select 
               options={sortOptions} 
@@ -39,9 +62,15 @@ export const Marketplace: React.FC = () => {
           </div>
 
           <div className="demand-list">
-            <DemandCard />
-            <DemandCard />
-            <DemandCard />
+            {loading ? (
+                  <p>Yükleniyor...</p>
+              ) : products.length > 0 ? (
+                  products.map((product) => (
+                      <DemandCard key={product.id} product={product} />
+                  ))
+              ) : (
+                  <p>Henüz gösterilecek bir ilan bulunmuyor.</p>
+            )}
           </div>
         </main>
       </div>

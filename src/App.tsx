@@ -3,7 +3,7 @@ import { Footer } from './components/layout/Footer';
 import { Navbar } from './components/layout/Navbar';
 import { Auth } from './pages/Auth/Auth';
 import { CorporateProfile } from './pages/CorporateProfile/CorporateProfile';
-import { CreatePost } from './pages/CreateTabs/CreatePost'; // Senin mevcut klasör yolun
+import { CreatePost } from './pages/CreateTabs/CreatePost';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Home } from './pages/Home/Home';
 import { LiveAuction } from './pages/LiveAuction/LiveAuction';
@@ -31,7 +31,7 @@ function App() {
           <Route path="/profile/bireysel" element={<UserProfile />} />
           <Route path="/profile/kurumsal" element={<CorporateProfile />} />
           
-          <Route path="/auction" element={<LiveAuction />} />
+          <Route path="/auction/:productId" element={<LiveAuction />} />
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
